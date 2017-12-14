@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+  <body>
+    <script type="text/javascript">
+
+	    function fn() {
+	        var promise = new Promise(function(resolve, reject) {
+	            setTimeout(function() {
+	            	console.log(resolve)
+	                resolve()
+	            }, 0)
+	        });
+
+	        console.log(promise.resolve)
+	        return promise;
+	    }
+	    fn().then(function() {
+	        console.log("fn1")
+	    }).then(function() {
+	        console.log('fn2')
+	    })
+    </script>
+</body>
+
+</html>

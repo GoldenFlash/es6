@@ -1,14 +1,32 @@
-class Promise(){
-	constractor(){
-
+class Promise() {
+	constractor() {
+		this.callback = [];
 	}
-	resolve(){
-
+	resolve() {
+		var execute = this.callback.shift();
+		execute.resolve()
 	}
-	reject(){
-
+	reject() {
+		var execute = this.callback.shift();
+		execute.resolve()
 	}
-	then(){
-		
+	then(success, fail) {
+		var obj = {
+			resolve: success,
+			reject: fail
+		}
+		this.callback.push(obj)
 	}
 }
+var promise = new Promise();
+function fn(){
+	setTimeout(function(){
+		promise.resolve()
+	})
+	return promise;
+}
+fn().then(function(){
+	console.log('fn1')
+}).then(function(){
+	console.log('fn2')
+})
