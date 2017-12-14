@@ -8,41 +8,27 @@
 
 <body>
     <script type="text/javascript">
-    class Promise1 {
-        constructor() {
-            this.callback = [];
-        }
-        resolve(data) {
-            var execute = this.callback.shift();
-            execute.resolve(data)
-        }
-        reject(data) {
-            var execute = this.callback.shift();
-            execute.reject(data)
-        }
-        then(success, fail) {
-            var obj = {
-                resolve: success,
-                reject: fail
-            }
-            this.callback.push(obj)
-            return this;
-        }
-    }
-    var promise = new Promise1();
-
+    	setTimeout(function(){
+    		console.log(122)
+    	})
     function fn() {
-        setTimeout(function() {
-            promise.resolve('data')
-        })
+        var promise = new Promise(function(resolve, reject) {
+            setTimeout(function() {
+            	console.log(11)
+                resolve()
+            }, 0)
+        });
+        console.log(1)
         return promise;
     }
-    fn().then(function(data) {
-        console.log(data)
-        promise.resolve()
+    fn().then(function() {
+        console.log("fn1")
     }).then(function() {
         console.log('fn2')
+    }).catch(function(error) {
+        console.log(error)
     })
+    console.log(2)
     </script>
 </body>
 
